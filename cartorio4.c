@@ -50,8 +50,10 @@ int registro() // função responsavel por cadastrar os usuarios no sistema
 	 file = fopen(arquivo,"a");
 	 fprintf(file,cargo); // salva o valor da variavel
 	 fclose(file); // fecha o arquivo
-	 
+	 system("cls");
+	
 	 system("pause"); // pausa a leitura do codigo ate outra ação
+	 system("cls");
 	 
 	 
 }
@@ -82,6 +84,7 @@ int consulta() //função responsavel por consultar nome de usuario
 	}
 	
 	system("pause");   // pausa a leitura do codigo ate outra ação
+	system("cls");
 }
 int deletar() // função responsavel por deleatar o usuario 
 {
@@ -89,73 +92,92 @@ int deletar() // função responsavel por deleatar o usuario
 	
 	printf("Digite o CPF do usuário a ser deletado:");
 	scanf("%s",cpf); //% refere-se a string
-	
-	remove(cpf); //opçao deletar
+	system("cls");
 	
 	FILE *file; //chamar a pasta "file"
-	file = fopen(cpf,"r"); // abrir a pasta" file"
-	 
+	file = fopen(cpf,"r"); // abrir a pasta" file" 
+	
+	
 	if(file == NULL) //Condição para arquivo nao encontrado
 	{
-		printf("O usuário não se encontra no sistema!.\n");
-		system("pause"); // pausa a leitura do codigo ate outra ação
 	
+		printf("Usuario não encontrado!\n");
+		system("pause"); // pausa a leitura do codigo ate outra ação
+		system("cls");
 	}
 	
+		fclose(file);
+		remove(cpf); //opçao deletar
+		printf("Usuario deletado com sucesso\n");
+		system("pause");
+		system("cls");
 }
 
 int main() // função principal
     {
 	int opcao=0; //Definindo variáveis
 	int laco=1;
+	char senhadigitada[10]="a";
+	int comparacao;
 	
-	for(laco=1;laco=1;) //looping para retornar ao menu principal
+	printf("### Cartório da EBAC ###\n\n");
+	printf("Login de administrador!\n\nDigite sua senha:");
+	scanf("%s",senhadigitada);
+	
+	comparacao =strcmp(senhadigitada, "admin");
+	
+	if(comparacao == 0)
 	{
-		system("cls"); //Responsavel por limpar a tela
-	
-		setlocale(LC_ALL, "Portuguese"); //Definindo a lingaugem
-	
-		printf("### Cartório da EBAC ###\n\n"); //inicío do menu
-		printf("Escolha a opção desejada do menu:\n\n");
-		printf("\t1 - Registrar nomes\n");
-		printf("\t2 - Consultar nomes\n");
-		printf("\t3 - Deletar nomes\n"); 
-		printf("\t4 - Sair do sistema\n\n");
-		printf("Opção:");// fim do menu
-	
-		scanf("%d" ,&opcao); //armazenando a escolha do usuário "%d"= numero inteiro "&opçao" = variavel 0
-	
-		system("cls"); // limpar a tela
-		
-		switch(opcao) // inicio da seleçao do menu
-		{
-			case 1: //":" funciona como se fosse uma chave
-			registro(); //chamada de funçoes
-			break; //fim da chave
-			
-			case 2:
-			consulta(); //chamada de funçoes
-			break;
-			
-			case 3:
-			deletar(); //chamada de funçoes
-			break;
-			
-			case 4:
-			printf("Obrigado por ultilizar o sistema");	
-			return 0;
-			break;
-			
-	
-			default: // opçao invalida
-			printf("Essa opção não está disponivel!\n");
-			system("pause");
-			break;
-			
-			
-		}
-	
-    
-	}
-}
 
+		system("cls");
+		for(laco=1;laco=1;) //looping para retornar ao menu principal
+		{
+	
+			setlocale(LC_ALL, "Portuguese"); //Definindo a lingaugem
+	
+			printf("### Cartório da EBAC ###\n\n"); //inicío do menu
+			printf("Escolha a opção desejada do menu:\n\n");
+			printf("\t1 - Registrar nomes\n");
+			printf("\t2 - Consultar nomes\n");
+			printf("\t3 - Deletar nomes\n"); 
+			printf("\t4 - Sair do sistema\n\n");
+			printf("Opção:");// fim do menu
+	
+			scanf("%d" ,&opcao); //armazenando a escolha do usuário "%d"= numero inteiro "&opçao" = variavel 0
+	
+			system("cls"); // limpar a tela
+		
+			switch(opcao) // inicio da seleçao do menu
+			{
+				case 1: //":" funciona como se fosse uma chave
+				registro(); //chamada de funçoes
+				break; //fim da chave
+			
+				case 2:
+				consulta(); //chamada de funçoes
+				break;
+			
+				case 3:
+				deletar(); //chamada de funçoes
+				break;
+			
+				case 4:
+				printf("Obrigado por ultilizar o sistema");	
+				return 0;
+				break;
+			
+	
+				default: // opçao invalida
+				printf("Essa opção não está disponivel!\n");
+				system("pause");
+				break;
+			}
+		}
+	}
+	
+	else
+		printf("Senha incorreta!");
+	
+	
+	
+}
